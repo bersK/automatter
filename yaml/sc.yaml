@@ -7,3 +7,16 @@ scripts:
     - /home/sstefanov01/bin/echocommands
     - /home/sstefanov01/bin/echocommands
     - /home/sstefanov01/bin/echocommands
+  # This is the sample structure I am hoping to go forward with
+  # The idea is to have prebuilt scripts that do something already
+  # and build quickly scenarios out of those scripts and automate in some way
+  # running said scripts/scenarios
+  scenarios:
+    scenario1:
+      - script1
+      - script2
+      - script3
+    scenario2:
+      - script1
+      - script2
+      - script3
