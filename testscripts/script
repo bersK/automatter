@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z ${1+x} ]
+then
+    echo "hello"
+else
+    echo "hello, this is script, param 1 is $1"
+fi
