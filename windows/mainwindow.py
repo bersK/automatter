@@ -6,7 +6,7 @@ def submit(*args):
     print(" ".join(args))
     out = launchScript(args)
     # out = sbp.run([" ".join(map(str, args))], stdout=sbp.PIPE, shell=True).stdout.decode("UTF-8").strip()
-    launchScriptInNewShell(" ".join(args), True)
+    launchScriptInNewShell(" ".join(args))
     print(out)
 
 def loadStyleConfig(path: str) -> str:
