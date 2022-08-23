@@ -1,7 +1,10 @@
 import argparse as ag
+import subprocess
 import distutils.util as dt
+from time import sleep
+import os
 
-from utils.scriptutils import launchScript, parseScriptsFromYaml
+from utils.scriptutils import launchScript, launchScriptInNewShell, parseScriptsFromYaml
 from windows.mainwindow import openWindow
 
 def main():
@@ -14,15 +17,17 @@ def main():
     print("Path string to the scripts:", args.c)
     print("Should launch TUI:", args.t)
 
-
     # test print
     # out = launchScript(["testscripts/script", 1000])
     # print(out)
 
     data = parseScriptsFromYaml(args.c)
+    scripts = data["scripts"]["paths"]
 
     if args.t is True:
         openWindow(data["scripts"]["paths"])
+
+    # launchScriptInNewShell(scripts[0])
 
     print(data)
 
