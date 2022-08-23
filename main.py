@@ -1,8 +1,7 @@
-from yaml.loader import SafeLoader
 import argparse as ag
 import distutils.util as dt
 
-from utils.scriptutils import launchScript
+from utils.scriptutils import launchScript, parseScriptsFromYaml
 from windows.mainwindow import openWindow
 
 def main():
@@ -15,11 +14,17 @@ def main():
     print("Path string to the scripts:", args.c)
     print("Should launch TUI:", args.t)
 
+
     # test print
-    out = launchScript(["testscripts/script", 1000])
-    print(out)
+    # out = launchScript(["testscripts/script", 1000])
+    # print(out)
+
+    data = parseScriptsFromYaml(args.c)
+
     if args.t is True:
-        openWindow()
+        openWindow(data["scripts"]["paths"])
+
+    print(data)
 
 if __name__ == "__main__":
     main()

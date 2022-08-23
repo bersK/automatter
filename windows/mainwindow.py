@@ -1,3 +1,4 @@
+from turtle import width
 from pytermgui import WindowManager, Window, InputField, YamlLoader, Container
 
 def submit(*args):
@@ -9,7 +10,17 @@ def loadStyleConfig(path: str) -> str:
     fileconfig.close()
     return yamlStyle
 
-def openWindow():
+def loadFields(fields: list) -> None:
+    input_fields = list()
+    input_fields.append("")
+    for field in fields:
+        input_fields.append(InputField(field, prompt="Path: "))
+        input_fields.append(["Submit", lambda *_: submit(field)])
+    input_fields.append("")
+
+    return Window(*input_fields, width=80, box="DOUBLE").set_title("[210 bold]Scripts").center()
+
+def openWindow(fields: list) -> None:
     yamlConfig: str = loadStyleConfig("./yaml/config.yaml")
 
     with YamlLoader() as loader:
@@ -26,20 +37,20 @@ def openWindow():
             ),
             box="EMPTY_VERTICAL",
         )
-        window = (
-            Window(
-                "",
-                name,
-                street,
-                number,
-                "",
-                additionalNotes,
-                "",
-                ["Submit", lambda *_: submit(name.value, street.value, number.value)],
-                width=60,
-                box="DOUBLE",
-            )
-            .set_title("[210 bold]New contact").center()
-        )
-
+        # window = (
+        #     Window(
+        #         "",
+        #         name,
+        #         street,
+        #         number,
+        #         "",
+        #         additionalNotes,
+        #         "",
+        #         ["Submit", lambda *_: submit(name.value, street.value, number.value)],
+        #         width=60,
+        #         box="DOUBLE",
+        #     )
+        #     .set_title("[210 bold]New contact").center()
+        # )
+        window = loadFields(fields)
         manager.add(window)
