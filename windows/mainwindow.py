@@ -1,13 +1,11 @@
-from pytermgui import WindowManager, Window, InputField, YamlLoader, Container
-from utils.scriptutils import launchScript, launchScriptInNewShell
+from pytermgui import *
+from utils.scriptutils import *
 import subprocess as sbp
 
 def submit(*args):
     print(" ".join(args))
-    out = launchScript(args)
-    # out = sbp.run([" ".join(map(str, args))], stdout=sbp.PIPE, shell=True).stdout.decode("UTF-8").strip()
+    # out = launchScript(args)
     launchScriptInNewShell(" ".join(args))
-    print(out)
 
 def loadStyleConfig(path: str) -> str:
     fileconfig = open(path, "r")

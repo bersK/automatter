@@ -1,35 +1,25 @@
-import argparse as ag
-import subprocess
-import distutils.util as dt
-from time import sleep
-import os
-
-from utils.scriptutils import launchScript, launchScriptInNewShell, parseScriptsFromYaml
+from dataclasses import dataclass
+from utils.parsing import ParsedSettings
+from utils.scriptutils import launchScriptInNewShell, parseScriptsFromYaml
 from windows.mainwindow import openWindow
 
+# @dataclass
+# class Program:
+#     pass
+
 def main():
-    parser = ag.ArgumentParser(conflict_handler="resolve", usage="Provide a yaml config, pls", formatter_class=ag.RawTextHelpFormatter)
-
-    parser.add_argument("-c", required=True, type=str, help="Path string to the scripts that will be executed in the program")
-    parser.add_argument('-t', default=False, type=lambda x: bool(dt.strtobool(str(x))), help="Choose whether to launc this tool with a TUI frontend or not.")
-
-    args = parser.parse_args()
-    print("Path string to the scripts:", args.c)
-    print("Should launch TUI:", args.t)
-
-    # test print
-    # out = launchScript(["testscripts/script", 1000])
-    # print(out)
+    args = ParsedSettings.parse()
+    # print("Path string to the scripts:", args.c)
+    # print("Should launch TUI:", args.t)
 
     data = parseScriptsFromYaml(args.c)
-    scripts = data["scripts"]["paths"]
+    scripts = data["scenarios"]["paths"]
 
+    # Launch TUI frontend if the flag is set to true
     if args.t is True:
-        openWindow(data["scripts"]["paths"])
-
-    # launchScriptInNewShell(scripts[0])
-
-    print(data)
+        openWindow(scripts)
+    else:
+        launchScriptInNewShell(scripts[0])
 
 if __name__ == "__main__":
     main()

@@ -13,7 +13,7 @@ def launchScript(args: list) -> str:
 def launchScriptInNewShell(arg: str, launchInTmux=False) -> None:
     sbp.Popen(f"gnome-terminal -- bash -c '{arg}; exec bash'", shell=True)
     if launchInTmux is True:
-        raise "Tmux integration not implemented yet"
+        raise Exception("Tmux integration not implemented yet")
 
 def parseScriptsFromYaml(path: str) -> dict:
     data = dict()
