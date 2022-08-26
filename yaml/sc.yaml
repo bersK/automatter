@@ -18,16 +18,15 @@ scenarios:
   # The idea is to have prebuilt scripts that do something already
   # and build quickly scenarios out of those scripts and automate in some way
   # running said scripts/scenarios
-  scenario1:
-    label: syncmaster
+  syncmaster:
+    - script1:
+        args:
+          - "-t 1000"
+    - script2
+    - script3
+  syncremote:
     - script1
     - script2
     - script3
-  scenario2:
-    label: syncautomation
-    - script1
-    - script2
-    - script3
-  scenario3:
-    label: syncbuild
+  wololol:
     - script1

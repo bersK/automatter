@@ -1,3 +1,4 @@
+import json
 import yaml
 from yaml.loader import SafeLoader
 import subprocess as sbp
@@ -21,3 +22,11 @@ def parseScriptsFromYaml(path: str) -> dict:
     data = yaml.load(stream, Loader=SafeLoader)
     stream.close()
     return data
+
+def parseScriptsFromJSON(path: str) :
+    x: dict = dict()
+    with open(path, "r") as f:
+        x = json.load(f)
+
+    y = json.dumps(x, indent=4)
+    return x, y

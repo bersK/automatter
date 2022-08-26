@@ -2,7 +2,7 @@ from pytermgui import *
 from utils.scriptutils import *
 import subprocess as sbp
 
-def submit(*args):
+def submit(args):
     print(" ".join(args))
     # out = launchScript(args)
     launchScriptInNewShell(" ".join(args))
@@ -13,7 +13,7 @@ def loadStyleConfig(path: str) -> str:
     fileconfig.close()
     return yamlStyle
 
-def loadFields(fields: list) -> None:
+def loadFields(fields: list) -> Window:
     input_fields = list()
     input_fields.append("")
     for field in fields:
@@ -21,7 +21,9 @@ def loadFields(fields: list) -> None:
         input_fields.append(["Launch", lambda *_: submit(field)])
     input_fields.append("")
 
-    return Window(*input_fields, width=80, box="DOUBLE").set_title("[210 bold]Scripts").center()
+    window = Window(*input_fields, width=80, box="DOUBLE")
+    window.set_title("[210 bold]Scripts").center()
+    return window
 
 def openWindow(fields: list) -> None:
     yamlConfig: str = loadStyleConfig("./yaml/config.yaml")

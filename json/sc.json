@@ -1,0 +1,22 @@
+{
+    "scripts": {
+        "echocommands": "~/bin/echocommands",
+        "syncmaster": "~/bin/syncmaster"
+    },
+    "scenarios": {
+        "task1" : {
+            "scripts" : [
+                "echocommands", "syncmaster"
+            ],
+            "arguments" : {
+                "echocommands" : [
+                    "-t",
+                    "1000"
+                ],
+                "syncmaster" : [
+                    "datacacheserver"
+                ]
+            }
+        }
+    }
+}
