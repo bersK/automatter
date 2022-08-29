@@ -1,31 +1,19 @@
-import json
 from program import Program
-import utils.parsing
-from utils.scriptutils import launchScriptInNewShell, parseScriptsFromJSON, parseScriptsFromYaml
-from windows.mainwindow import openWindow
 
 def main():
-    d, s = parseScriptsFromJSON("./json/sc.json")
+    program = Program("json/sc.json")
+    scenarios = program.getScenarios()
 
-    if True:
-        program = Program()
-        # scripts = data["scenarios"]["paths"]
-        scripts = d["scripts"].values()
-
-        # Launch TUI frontend if the flag is set to true
-        # if args.t is False:
-        #     openWindow(scripts)
-        # else:
-        #     launchScriptInNewShell(scripts[0])
-
-    scenarios = d["scenarios"]
-
-    for sc, _ in scenarios.items():
-        for script in scenarios[sc]["scripts"]:
-            print(script, end=" ")
-            for arg in scenarios[sc]["arguments"][script]:
-                print(arg, end=" ")
+    if False: # print the scenario scripts with their arguments
+        for scenario, _ in scenarios.items():
             print()
+            print(f"Scenario: {scenario}")
+            for script in scenarios[scenario]["scripts"]:
+                print(script, end=" ")
+                for arg in scenarios[scenario]["arguments"][script]:
+                    print(arg, end=" ")
+                print()
+                print(program.getScriptPath(script))
 
 if __name__ == "__main__":
     main()
