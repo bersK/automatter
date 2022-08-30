@@ -1,5 +1,3 @@
-from utils.scriptutils import parseScriptsFromJSON
-import json
 from program import Program
 
 test_json_path = "json/test_sc.json"
